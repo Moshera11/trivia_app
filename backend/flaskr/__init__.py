@@ -40,6 +40,7 @@ def create_app(test_config=None):
         'categories':{category.id: category.type for category in categories}
       })
     except:
+      print(sys.exc_info())
       abort(422)
 
   '''
@@ -64,7 +65,7 @@ def create_app(test_config=None):
     start= (page-1)*10
     end= start+10
     categories=Category.query.all()
-    if len(questions_formatted[start:end]) is 0 :
+    if len(questions_formatted[start:end]) == 0 :
       abort(404)
     return jsonify({
       'success':True,
